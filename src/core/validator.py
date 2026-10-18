@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import List, Tuple
+from typing import Any, Dict, List, Tuple
 from src.core.models import State
 
 
@@ -88,3 +88,17 @@ def is_valid_state(state: State) -> Tuple[bool, List[str]]:
         + check_capacity_violations(state)
     )
     return len(violations) == 0, violations
+
+
+def evaluate_state_metrics(state: State) -> Dict[str, Any]:
+    """Merangkum status validitas, daftar pelanggaran, dan metrik penataan state"""
+    is_valid, violations = is_valid_state(state)
+    return {
+        "is_valid": is_valid,
+        "violations_count": len(violations),
+        "violations": violations,
+        "total_value": state.total_value_in_truck,
+        "total_weight": state.total_weight_in_truck,
+        "packages_in_truck_count": len(state.packages_in_truck),
+        "packages_outside_count": len(state.packages_outside_truck),
+    }

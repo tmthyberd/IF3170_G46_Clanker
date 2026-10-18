@@ -7,6 +7,7 @@ from src.core.validator import (
     check_floating_violations,
     check_fragile_violations,
     check_capacity_violations,
+    evaluate_state_metrics,
 )
 from src.core.objective import calculate_objective
 from src.core.moves import (
@@ -87,10 +88,36 @@ class TestCoreDomain(unittest.TestCase):
         self.assertFalse(valid)
         self.assertTrue(any("capacity" in v for v in violations))
 
+    def test_evaluate_state_metrics(self):
+        state = State(truck=self.truck, packages=self.packages)
+        res = evaluate_state_metrics(state)
+        self.assertIn("is_valid", res)
+        self.assertIn("violations", res)
+        self.assertIn("total_value", res)
+        self.assertIn("total_weight", res)
     def test_json_loading(self):
         truck, pkgs = load_input_json("data/sample_input.json")
         self.assertGreater(len(pkgs), 0)
         self.assertEqual(truck.w, 10)
+
+    def test_algorithm_result_contract(self):
+        from src.core.interfaces import AlgorithmResult
+        state = State(truck=self.truck, packages=self.packages)
+        result = AlgorithmResult(
+            algorithm_name="TestAlgo",
+            initial_state=state,
+            final_state=state,
+            initial_objective=10.0,
+            final_objective=50.0,
+            duration_seconds=0.12,
+            total_iterations=100,
+            objective_history=[10.0, 50.0],
+            extra_metrics={"test": True},
+        )
+        d = result.to_dict()
+        self.assertEqual(d["algorithm"], "TestAlgo")
+        self.assertEqual(d["final_objective"], 50.0)
+
 
 
 if __name__ == "__main__":

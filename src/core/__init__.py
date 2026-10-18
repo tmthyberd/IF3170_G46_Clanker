@@ -1,6 +1,8 @@
 from src.core.models import Package, Truck, Placement, State, ORIENTATION_MAP
+from src.core.interfaces import AlgorithmResult, BaseValidator, BaseAlgorithm
 from src.core.validator import (
     is_valid_state,
+    evaluate_state_metrics,
     check_boundary_violations,
     check_overlap_violations,
     check_floating_violations,
@@ -28,7 +30,11 @@ __all__ = [
     "Placement",
     "State",
     "ORIENTATION_MAP",
+    "AlgorithmResult",
+    "BaseValidator",
+    "BaseAlgorithm",
     "is_valid_state",
+    "evaluate_state_metrics",
     "check_boundary_violations",
     "check_overlap_violations",
     "check_floating_violations",
