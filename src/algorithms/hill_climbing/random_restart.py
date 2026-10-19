@@ -1,60 +1,92 @@
 from __future__ import annotations
 import time
-from typing import Callable, Dict, List
-from src.core.models import Package, State, Truck
+from typing import Dict, List, Generator, Any
+
+from src.core.models import Package, SolverState, Truck
+
 from src.core.objective import calculate_objective
-from src.core.moves import generate_initial_state
+from src.core.moves import generate_initial_state, get_all_successors
+
 from src.algorithms.hill_climbing.base import HillClimbingResult
 from src.algorithms.hill_climbing.steepest_ascent import steepest_ascent_hill_climbing
 
 
+DEFAULT_MAX_RESTART = 25
+
+
 def random_restart_hill_climbing(
-    truck: Truck,
-    packages: Dict[str, Package],
-    max_restarts: int = 5,
-    max_iterations_per_restart: int = 200,
-    sample_neighbors: int = 30,
-    objective_fn: Callable[[State], float] = calculate_objective,
-) -> HillClimbingResult:
-    """Random Restart Hill-Climbing: menjalankan Steepest Ascent berulang kali dari state acak baru"""
+    trucks: List[Truck],
+    packages: List[Package],
+    max_restarts: int = DEFAULT_MAX_RESTART,
+    strict: bool = False,
+    objective_type: str = "default"
+) -> Generator[Dict[str, Any], None, None]:
+
     start_time = time.perf_counter()
-    first_state = generate_initial_state(truck, packages, random_strategy="valid_floor")
-    best_state = first_state
-    best_val = objective_fn(best_state)
 
-    combined_history: List[float] = [best_val]
-    iters_per_restart: List[int] = []
+    global_idx = 0
+    global_best_val = float('-inf')
+    global_best_state = None
 
-    for r in range(max_restarts):
-        init_state = first_state if r == 0 else generate_initial_state(truck, packages, random_strategy="valid_floor")
-        run = steepest_ascent_hill_climbing(
-            initial_state=init_state,
-            max_iterations=max_iterations_per_restart,
-            sample_neighbors=sample_neighbors,
-            objective_fn=objective_fn,
-        )
-        iters_per_restart.append(run.total_iterations)
-        combined_history.extend(run.objective_history[1:])
+    iter_count = []
 
-        # Simpan solusi terbaik global di seluruh percobaan restart
-        if run.final_objective > best_val:
-            best_val = run.final_objective
-            best_state = run.final_state
+    for restart_id in range(max_restarts):
+        current_state = generate_initial_state(trucks, packages, randomize=True)
+        current_val = calculate_objective(current_state, objective_type=objective_type, strict=strict)
 
-    total_iters = sum(iters_per_restart)
-    return HillClimbingResult(
-        algorithm_name="Random Restart Hill-Climbing",
-        initial_state=first_state,
-        final_state=best_state,
-        initial_objective=combined_history[0],
-        final_objective=best_val,
-        duration_seconds=time.perf_counter() - start_time,
-        total_iterations=total_iters,
-        objective_history=combined_history,
-        extra_metrics={
-            "max_restarts": max_restarts,
-            "restarts_completed": max_restarts,
-            "iterations_per_restart": iters_per_restart,
-            "avg_iterations_per_restart": total_iters / max(1, max_restarts),
-        },
-    )
+        if current_val > global_best_val:
+            global_best_val = current_val
+            global_best_state = current_state.clone()
+
+        yield {
+            "restart_id": restart_id,
+            "iteration": global_idx,
+            "objective_value": current_val,
+            "state": {k: v.to_dict() for k, v in current_state.placements.items()},
+            "duration": 0.0,
+            "message": f"Restart {restart_id}: Initial state (Score: {current_val:.1f})"
+        }
+        global_idx += 1
+
+
+        iteration = 0
+        while True:
+            iteration += 1
+            
+            best_successor_val = float('-inf')
+            neighbor = None
+            for successor in get_all_successors(current_state, valid_only=True):
+                score = calculate_objective(successor, objective_type=objective_type, strict=strict)
+                if best_successor_val < score:
+                    best_successor_val = score
+                    neighbor = successor
+
+            if neighbor is None or best_successor_val <= current_val:
+                break
+            
+            current_val = best_successor_val
+            current_state = neighbor
+
+            if current_val > global_best_val:
+                global_best_val = current_val
+                global_best_state = current_state.clone()
+
+            yield {
+                "restart_id": restart_id,
+                "iteration": global_idx,
+                "objective_value": current_val,
+                "state": {k: v.to_dict() for k, v in current_state.placements.items()},
+                "duration": time.perf_counter() - start_time,
+                "message": f"Restart {restart_id}: Step {iteration}: Steepest ascent to best neighbor ({current_val:.1f})",
+            }
+            global_idx += 1
+        
+        iter_count.append(iteration)
+
+    print(iter_count)
+    yield {
+        "restart_iter_count": iter_count,
+        "global_best_value": global_best_val,
+        "global_best_state": {k: v.to_dict() for k, v in global_best_state.placements.items()},
+        "finished": f"Finished {max_restarts} random restart process"
+    }
