@@ -66,9 +66,6 @@ def run_ga_matrix_experiments(
     print(f"Bagian 2: Kontrol Iterasi (G={fixed_iterations}) x Populasi {pop_vars}")
     print(f"{'='*75}\n")
 
-    # ==========================================
-    # BAGIAN 1: KONTROL POPULASI (VARIASI ITERASI)
-    # ==========================================
     print(f">>> [BAGIAN 1] Kontrol Populasi Tetap (N = {fixed_population}) <<<")
     for iters in iter_vars:
         runs_for_iter: List[Dict[str, Any]] = []
@@ -146,9 +143,6 @@ def run_ga_matrix_experiments(
             "runs": runs_for_iter,
         }
 
-    # ==========================================
-    # BAGIAN 2: KONTROL ITERASI (VARIASI POPULASI)
-    # ==========================================
     print(f"\n>>> [BAGIAN 2] Kontrol Iterasi Tetap (G = {fixed_iterations}) <<<")
     for pop in pop_vars:
         runs_for_pop: List[Dict[str, Any]] = []
