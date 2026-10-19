@@ -215,6 +215,11 @@ def build_arg_parser() -> argparse.ArgumentParser:
         default="uniform",
         help="Metode crossover GA (default: uniform)",
     )
+    parser.add_argument(
+        "--run_ga_matrix",
+        action="store_true",
+        help="Jalankan otomatis seluruh 18 kombinasi eksperimen matriks GA (kontrol populasi & iterasi)",
+    )
 
     return parser
 
@@ -222,6 +227,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
 def main() -> None:
     parser = build_arg_parser()
     args = parser.parse_args()
+
+    if args.run_ga_matrix:
+        from src.experiments.ga_matrix_runner import run_ga_matrix_experiments
+        run_ga_matrix_experiments(
+            input_file=args.input,
+            output_dir=args.output_dir,
+            fixed_population=args.ga_population,
+            fixed_iterations=args.ga_generations,
+            repetitions=args.runs,
+            base_seed=args.seed or 42,
+        )
+        return
 
     algo_list: List[str] = []
     if args.algorithm == "all":
