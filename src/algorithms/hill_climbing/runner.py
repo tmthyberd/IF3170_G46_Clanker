@@ -61,7 +61,6 @@ def main():
                     max_iterations_per_restart=args.iterations,
                 )
 
-            # Validasi status akhir state
             is_valid, violations = is_valid_state(res.final_state)
             saved_file = save_run_output(
                 output_dir=args.output_dir,

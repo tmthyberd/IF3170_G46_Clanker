@@ -6,7 +6,7 @@ from src.core.validator import is_valid_state
 
 
 def swap_packages(state: State, pkg_id1: str, pkg_id2: str) -> State:
-    """Move 1: Tukar atribut penempatan antara dua paket"""
+    """Tukar atribut penempatan antara dua paket."""
     new_state = state.clone()
     p1, p2 = new_state.placements[pkg_id1], new_state.placements[pkg_id2]
     p1.position, p1.orientation, p1.in_truck, p2.position, p2.orientation, p2.in_truck = (
@@ -16,7 +16,7 @@ def swap_packages(state: State, pkg_id1: str, pkg_id2: str) -> State:
 
 
 def move_package_coordinate(state: State, pkg_id: str, new_coord: Tuple[int, int, int]) -> State:
-    """Move 2: Pindahkan paket ke koordinat (x, y, z) baru di dalam truk"""
+    """Pindahkan paket ke koordinat baru di dalam truk."""
     new_state = state.clone()
     p = new_state.placements[pkg_id]
     p.position = new_coord
@@ -25,7 +25,7 @@ def move_package_coordinate(state: State, pkg_id: str, new_coord: Tuple[int, int
 
 
 def rotate_package(state: State, pkg_id: str, new_orientation: Optional[int] = None) -> State:
-    """Move 3: Putar orientasi paket 90 derajat (indeks 0..5)"""
+    """Putar orientasi paket 90 derajat."""
     new_state = state.clone()
     p = new_state.placements[pkg_id]
     p.orientation = new_orientation % 6 if new_orientation is not None else (p.orientation + 1) % 6

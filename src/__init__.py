@@ -1,2 +1,2 @@
-"""Paket optimasi 3D Bin Packing Mejiro Express IF3170"""
+"""3D Container Loading optimization package."""
 __version__ = "1.0.0"

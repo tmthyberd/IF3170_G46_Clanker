@@ -68,12 +68,10 @@ class TestGeneticAlgorithm(unittest.TestCase):
         p2.state.placements["P1"].in_truck = False
         p2.state.placements["P4"].in_truck = True
 
-        # Test Uniform Crossover
         c1, c2 = uniform_crossover(p1, p2, rng=rng)
         self.assertEqual(len(c1.state.placements), 4)
         self.assertEqual(len(c2.state.placements), 4)
 
-        # Test Two-Point Crossover
         c3, c4 = two_point_crossover(p1, p2, rng=rng)
         self.assertEqual(len(c3.state.placements), 4)
         self.assertEqual(len(c4.state.placements), 4)

@@ -29,7 +29,6 @@ def stochastic_hill_climbing(
         if not improving:
             break
 
-        # Pilih salah satu langkah menanjak secara acak terbobot berdasarkan nilai delta
         weights = [delta for _, _, delta in improving]
         current_state, current_val, _ = random.choices(improving, weights=weights, k=1)[0]
         history.append(current_val)

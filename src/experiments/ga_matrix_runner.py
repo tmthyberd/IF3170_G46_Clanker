@@ -84,7 +84,6 @@ def run_ga_matrix_experiments(
                 seed=run_seed,
             )
 
-            # Simpan log detail per run
             saved_log = save_benchmark_log(
                 output_dir=output_dir,
                 result=res,
@@ -97,7 +96,6 @@ def run_ga_matrix_experiments(
                 },
             )
 
-            # Plot konvergensi per run
             plot_file = None
             if generate_plots:
                 plot_filename = f"ga_ctrl_pop_{fixed_population}_iter_{iters}_run_{r}.png"
@@ -218,12 +216,10 @@ def run_ga_matrix_experiments(
             "runs": runs_for_pop,
         }
 
-    # Simpan ringkasan eksperimen ke JSON
     summary_path = os.path.join(output_dir, "ga_experiments_summary.json")
     with open(summary_path, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
 
-    # Buat grafik perbandingan parameter
     if generate_plots:
         analysis_plot = os.path.join(plots_dir, "ga_parameter_analysis.png")
         plot_parameter_analysis(summary, analysis_plot)
@@ -235,7 +231,7 @@ def run_ga_matrix_experiments(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Otomasi Eksperimen 18x Run Genetic Algorithm IF3170"
+        description="Eksperimen matriks parameter Genetic Algorithm"
     )
     parser.add_argument("--input", default="data/sample_input.json", help="Path ke file data JSON input")
     parser.add_argument("--output_dir", default="output", help="Folder penyimpanan hasil eksperimen")

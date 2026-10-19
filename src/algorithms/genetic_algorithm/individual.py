@@ -22,7 +22,7 @@ class Individual:
         return self.fitness
 
     def clone(self) -> Individual:
-        """Membuat salinan mendalam (deep clone) dari individu"""
+        """Duplikasi objek individu."""
         return Individual(
             state=self.state.clone(),
             fitness=self.fitness,

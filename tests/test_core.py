@@ -54,7 +54,6 @@ class TestCoreDomain(unittest.TestCase):
 
     def test_floating_detection(self):
         state = State(truck=self.truck, packages=self.packages)
-        # P3 diletakkan pada z=3 tanpa penopang di bawahnya
         state.placements["P3"] = Placement("P3", position=(0, 0, 3), in_truck=True)
         valid, violations = is_valid_state(state)
         self.assertFalse(valid)
@@ -62,18 +61,14 @@ class TestCoreDomain(unittest.TestCase):
 
     def test_valid_stack_on_non_fragile(self):
         state = State(truck=self.truck, packages=self.packages)
-        # P1 di lantai (z=0, h=2)
         state.placements["P1"] = Placement("P1", position=(0, 0, 0), in_truck=True)
-        # P3 ditumpuk di atas P1 (z=2)
         state.placements["P3"] = Placement("P3", position=(0, 0, 2), in_truck=True)
         valid, violations = is_valid_state(state)
         self.assertTrue(valid, f"Expected valid stack but got violations: {violations}")
 
     def test_fragile_underneath_violation(self):
         state = State(truck=self.truck, packages=self.packages)
-        # P2 bersifat fragile di lantai (z=0, h=2)
         state.placements["P2"] = Placement("P2", position=(0, 0, 0), in_truck=True)
-        # P3 ditumpuk di atas paket fragile P2
         state.placements["P3"] = Placement("P3", position=(0, 0, 2), in_truck=True)
         valid, violations = is_valid_state(state)
         self.assertFalse(valid)

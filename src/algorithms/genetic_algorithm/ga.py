@@ -39,7 +39,6 @@ def genetic_algorithm(
     start_time = time.perf_counter()
     rng = random.Random(seed)
 
-    # Inisialisasi populasi
     population: List[Individual] = []
     if initial_state is not None:
         init_ind = Individual(state=initial_state.clone())
@@ -58,21 +57,18 @@ def genetic_algorithm(
     best_history: List[float] = []
     avg_history: List[float] = []
 
-    # Fungsi seleksi terpilih
     select_fn = (
         (lambda pop: tournament_selection(pop, tournament_size=tournament_size, rng=rng))
         if selection_method == "tournament"
         else (lambda pop: roulette_wheel_selection(pop, rng=rng))
     )
 
-    # Fungsi rekombinasi terpilih
     cross_fn = (
         (lambda p1, p2: uniform_crossover(p1, p2, rng=rng))
         if crossover_method == "uniform"
         else (lambda p1, p2: two_point_crossover(p1, p2, rng=rng))
     )
 
-    # Main Evolutionary Loop
     for gen in range(max_generations):
         population.sort(key=lambda x: x.fitness, reverse=True)
 
@@ -85,12 +81,10 @@ def genetic_algorithm(
         if verbose and (gen % 10 == 0 or gen == max_generations - 1):
             print(f"Gen {gen:4d} | Best Fitness: {current_best:8.2f} | Avg Fitness: {current_avg:8.2f}")
 
-        # Elitisme: lindungi individu terbaik tanpa mutasi
         next_gen: List[Individual] = [
             population[i].clone() for i in range(min(elitism_count, len(population)))
         ]
 
-        # Pembangkitan keturunan (offspring)
         while len(next_gen) < population_size:
             p1 = select_fn(population)
             p2 = select_fn(population)
@@ -116,7 +110,6 @@ def genetic_algorithm(
 
         population = next_gen
 
-    # Evaluasi dan pengurutan akhir
     population.sort(key=lambda x: x.fitness, reverse=True)
     best_final = population[0].clone()
     elapsed = time.perf_counter() - start_time

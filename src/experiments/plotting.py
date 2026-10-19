@@ -15,16 +15,13 @@ def plot_ga_convergence(
     y_label: str = "Nilai Objective Function",
 ) -> str:
     """
-    Membuat grafik konvergensi nilai objective function maksimum dan rata-rata
-    dari populasi terhadap banyak iterasi/generasi yang telah dilewati.
-    Menggunakan palet warna standar industri (Biru Royal & Oranye) untuk kejelasan visual.
+    Membuat grafik konvergensi fitness maksimum dan rata-rata populasi terhadap iterasi.
     """
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
 
     fig, ax = plt.subplots(figsize=(9, 5), dpi=150)
     iterations = list(range(1, len(history_max) + 1))
 
-    # Garis nilai maksimum populasi (Biru Klasik)
     ax.plot(
         iterations,
         history_max,
@@ -33,7 +30,6 @@ def plot_ga_convergence(
         linewidth=2.2,
     )
 
-    # Garis nilai rata-rata populasi (Oranye Terang)
     ax.plot(
         iterations,
         history_avg,
@@ -69,7 +65,6 @@ def plot_parameter_analysis(
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5), dpi=150)
 
-    # Panel 1: Kontrol Populasi (Variasi Iterasi)
     ctrl_pop = summary_data.get("control_population", {})
     pop_fixed = ctrl_pop.get("fixed_population", "N/A")
     runs_by_iter = ctrl_pop.get("variations", {})
@@ -88,7 +83,6 @@ def plot_parameter_analysis(
     ax1_twin.plot(iter_keys, avg_times_iter, marker="s", color="#d62728", linestyle="--", label="Durasi (s)")
     ax1_twin.set_ylabel("Rata-rata Durasi (detik)", fontsize=10, color="#d62728")
 
-    # Panel 2: Kontrol Iterasi (Variasi Populasi)
     ctrl_gen = summary_data.get("control_generations", {})
     gen_fixed = ctrl_gen.get("fixed_generations", "N/A")
     runs_by_pop = ctrl_gen.get("variations", {})

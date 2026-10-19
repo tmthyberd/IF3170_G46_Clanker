@@ -19,7 +19,7 @@ def calculate_objective(state: State, enforce_hard_constraints: bool = True) -> 
 
 
 def calculate_alternative_objective(state: State) -> float:
-    """Bonus 1 (+3 poin): gabungan nilai paket, utilisasi volume, urgensi ETA, dan stabilitas titik berat"""
+    """Fungsi objektif alternatif: kombinasi nilai, utilisasi volume, urgensi ETA, dan stabilitas titik berat."""
     is_valid, violations = is_valid_state(state)
     if not is_valid:
         return -PENALTY_PER_VIOLATION * len(violations)

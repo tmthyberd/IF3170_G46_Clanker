@@ -191,12 +191,10 @@ def build_arg_parser() -> argparse.ArgumentParser:
         help="Cetak rincian proses per iterasi",
     )
 
-    # Parameter Hill-Climbing
     parser.add_argument("--hc_iterations", type=int, default=200, help="Maksimum iterasi Hill-Climbing")
     parser.add_argument("--hc_max_sideways", type=int, default=50, help="Batas maksimum sideways moves")
     parser.add_argument("--hc_max_restarts", type=int, default=5, help="Batas maksimum restart")
 
-    # Parameter Genetic Algorithm
     parser.add_argument("--ga_population", type=int, default=50, help="Jumlah populasi GA (default: 50)")
     parser.add_argument("--ga_generations", type=int, default=100, help="Jumlah generasi/iterasi GA (default: 100)")
     parser.add_argument("--ga_crossover_rate", type=float, default=0.8, help="Probabilitas crossover (default: 0.8)")

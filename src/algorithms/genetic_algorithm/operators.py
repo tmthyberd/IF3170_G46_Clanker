@@ -16,7 +16,7 @@ def tournament_selection(
     tournament_size: int = 3,
     rng: Optional[random.Random] = None,
 ) -> Individual:
-    """Seleksi orang tua menggunakan Tournament Selection"""
+    """Tournament selection."""
     r = rng if rng is not None else random
     k = min(tournament_size, len(population))
     candidates = r.sample(population, k)
@@ -27,10 +27,9 @@ def roulette_wheel_selection(
     population: List[Individual],
     rng: Optional[random.Random] = None,
 ) -> Individual:
-    """Seleksi orang tua menggunakan Roulette Wheel (Fitness Proportionate) Selection"""
+    """Roulette wheel selection."""
     r = rng if rng is not None else random
     min_fit = min(ind.fitness for ind in population)
-    # Geser fitness agar seluruh bobot probabilitas bernilai positif
     shifted_fitnesses = [ind.fitness - min_fit + 1.0 for ind in population]
     total_fit = sum(shifted_fitnesses)
     pick = r.uniform(0, total_fit)
@@ -102,12 +101,7 @@ def mutate_individual(
     truck: Truck,
     rng: Optional[random.Random] = None,
 ) -> Individual:
-    """
-    Operator mutasi stokastik yang patuh pada 3 move yang diizinkan spesifikasi:
-    1. Swap dua paket (baik di dalam maupun di luar truk)
-    2. Pindahkan paket ke koordinat baru atau ubah status di dalam/luar truk
-    3. Rotasi paket 90 derajat (sumbu x, y, atau z)
-    """
+    """Mutasi stokastik: swap penempatan, translasi posisi/status muat, atau rotasi orientasi."""
     r = rng if rng is not None else random
     state = individual.state.clone()
     pkg_ids = list(state.packages.keys())
@@ -124,7 +118,6 @@ def mutate_individual(
     elif move_type == "relocate":
         pid = r.choice(pkg_ids)
         current_p = state.placements[pid]
-        # 50% peluang toggle in/out atau translasi koordinat baru
         if r.random() < 0.4:
             new_in_truck = not current_p.in_truck
             dx, dy, dz = state.get_package_dims(pid)

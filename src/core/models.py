@@ -2,7 +2,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, field
 from typing import Any, Dict, List, Tuple
 
-# 6 orientasi rotasi 3D ortogonal untuk paket (w, l, h) ke (dx, dy, dz)
+# Orientasi ortogonal 3D (0..5)
 ORIENTATION_MAP = [
     {"w": "x", "l": "y", "h": "z"},  # 0: (w, l, h)
     {"w": "x", "l": "z", "h": "y"},  # 1: (w, h, l)
@@ -84,7 +84,6 @@ class State:
     placements: Dict[str, Placement] = field(default_factory=dict)
 
     def __post_init__(self):
-        # Pastikan setiap paket memiliki data penempatan awal
         for pkg_id in self.packages:
             if pkg_id not in self.placements:
                 self.placements[pkg_id] = Placement(package_id=pkg_id, in_truck=False)

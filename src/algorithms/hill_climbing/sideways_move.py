@@ -35,13 +35,11 @@ def sideways_hill_climbing(
         best_val = max(val for val, _ in scored)
         best_neighbors = [n for val, n in scored if val == best_val]
 
-        # Pindah ke state tetangga yang memiliki nilai objektif lebih baik
         if best_val > current_val:
             current_state = random.choice(best_neighbors)
             current_val = best_val
             consecutive_sideways = 0
             history.append(current_val)
-        # Pindah ke state tetangga bernilai sama selama belum mencapai batas sideways move
         elif best_val == current_val and consecutive_sideways < max_sideways_moves:
             consecutive_sideways += 1
             total_sideways += 1

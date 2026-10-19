@@ -36,7 +36,6 @@ def random_restart_hill_climbing(
         iters_per_restart.append(run.total_iterations)
         combined_history.extend(run.objective_history[1:])
 
-        # Simpan solusi terbaik global di seluruh percobaan restart
         if run.final_objective > best_val:
             best_val = run.final_objective
             best_state = run.final_state
