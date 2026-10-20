@@ -27,15 +27,7 @@ __all__ = [
     "Placement",
     "State",
     "ORIENTATION_MAP",
-<<<<<<< HEAD
-    "AlgorithmResult",
-    "BaseValidator",
-    "BaseAlgorithm",
-    "is_valid_state",
-    "evaluate_state_metrics",
-=======
     "validate_state",
->>>>>>> feat/sim-annealing
     "check_boundary_violations",
     "check_overlap_violations",
     "check_floating_violations",

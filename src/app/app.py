@@ -66,4 +66,4 @@ if __name__ == '__main__':
         ], id="main-layout-row", className="g-3 align-items-stretch me-0 ms-0")
     ], fluid=True, className="pb-4 bg-light")
 
-    app.run(debug=DEBUG)
+    app.run(debug=DEBUG, host='0.0.0.0', port=8080)

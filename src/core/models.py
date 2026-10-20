@@ -309,19 +309,7 @@ class SolverState:
         self.packages = dict(packages) if packages is not None else {}
         self.placements: Dict[str, Placement] = dict(placements) if placements is not None else {}
 
-<<<<<<< HEAD
-
-@dataclass
-class State:
-    """State lengkap penempatan seluruh paket di dalam dan di luar truk"""
-    truck: Truck
-    packages: Dict[str, Package]
-    placements: Dict[str, Placement] = field(default_factory=dict)
-
-    def __post_init__(self):
-=======
         # Pastikan setiap paket memiliki data penempatan awal
->>>>>>> feat/sim-annealing
         for pkg_id in self.packages:
             if pkg_id not in self.placements:
                 self.placements[pkg_id] = Placement(package_id=pkg_id, in_truck=False)
