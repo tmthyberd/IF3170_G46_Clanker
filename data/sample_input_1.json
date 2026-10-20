@@ -1,0 +1,706 @@
+{
+    "trucks": [
+      {
+        "id": "Truck_1",
+        "dimensions": {
+          "w": 14.9,
+          "l": 14.6,
+          "h": 6.1
+        },
+        "max_capacity": 872.0
+      },
+      {
+        "id": "Truck_2",
+        "dimensions": {
+          "w": 14.9,
+          "l": 21.0,
+          "h": 5.4
+        },
+        "max_capacity": 482.0
+      },
+      {
+        "id": "Truck_3",
+        "dimensions": {
+          "w": 9.6,
+          "l": 14.1,
+          "h": 3.6
+        },
+        "max_capacity": 415.0
+      },
+      {
+        "id": "Truck_4",
+        "dimensions": {
+          "w": 10.1,
+          "l": 12.9,
+          "h": 5.5
+        },
+        "max_capacity": 651.0
+      },
+      {
+        "id": "Truck_5",
+        "dimensions": {
+          "w": 14.0,
+          "l": 11.3,
+          "h": 6.5
+        },
+        "max_capacity": 879.0
+      },
+      {
+        "id": "Truck_6",
+        "dimensions": {
+          "w": 10.9,
+          "l": 26.1,
+          "h": 3.4
+        },
+        "max_capacity": 558.0
+      },
+      {
+        "id": "Truck_7",
+        "dimensions": {
+          "w": 13.7,
+          "l": 16.4,
+          "h": 3.8
+        },
+        "max_capacity": 700.0
+      }
+    ],
+    "packages": [
+      {
+        "id": "Package_5095",
+        "dimensions": {
+          "w": 8.0,
+          "l": 2.8,
+          "h": 3.1
+        },
+        "weight": 55.3,
+        "value": 150.5,
+        "is_fragile": false,
+        "eta": 7.0,
+        "orientation": 1
+      },
+      {
+        "id": "Package_8596",
+        "dimensions": {
+          "w": 2.0,
+          "l": 1.4,
+          "h": 2.4
+        },
+        "weight": 31.2,
+        "value": 115.3,
+        "is_fragile": true,
+        "eta": 3.0,
+        "orientation": 0
+      },
+      {
+        "id": "Package_1896",
+        "dimensions": {
+          "w": 1.5,
+          "l": 3.1,
+          "h": 2.9
+        },
+        "weight": 34.8,
+        "value": 7.4,
+        "is_fragile": false,
+        "eta": 5.0,
+        "orientation": 1
+      },
+      {
+        "id": "Package_1423",
+        "dimensions": {
+          "w": 7.2,
+          "l": 2.5,
+          "h": 1.7
+        },
+        "weight": 14.8,
+        "value": 114.2,
+        "is_fragile": false,
+        "eta": 2.0,
+        "orientation": 5
+      },
+      {
+        "id": "Package_7242",
+        "dimensions": {
+          "w": 5.6,
+          "l": 3.5,
+          "h": 1.9
+        },
+        "weight": 90.1,
+        "value": 178.7,
+        "is_fragile": false,
+        "eta": 6.0,
+        "orientation": 3
+      },
+      {
+        "id": "Package_7389",
+        "dimensions": {
+          "w": 4.8,
+          "l": 5.1,
+          "h": 1.3
+        },
+        "weight": 53.7,
+        "value": 163.8,
+        "is_fragile": false,
+        "eta": 7.0,
+        "orientation": 5
+      },
+      {
+        "id": "Package_387",
+        "dimensions": {
+          "w": 3.0,
+          "l": 6.8,
+          "h": 3.0
+        },
+        "weight": 32.2,
+        "value": 136.8,
+        "is_fragile": false,
+        "eta": 3.0,
+        "orientation": 3
+      },
+      {
+        "id": "Package_6078",
+        "dimensions": {
+          "w": 4.9,
+          "l": 3.7,
+          "h": 1.3
+        },
+        "weight": 96.6,
+        "value": 105.5,
+        "is_fragile": false,
+        "eta": 4.0,
+        "orientation": 0
+      },
+      {
+        "id": "Package_4540",
+        "dimensions": {
+          "w": 4.3,
+          "l": 7.4,
+          "h": 3.5
+        },
+        "weight": 79.1,
+        "value": 36.4,
+        "is_fragile": false,
+        "eta": 1.0,
+        "orientation": 4
+      },
+      {
+        "id": "Package_4670",
+        "dimensions": {
+          "w": 1.9,
+          "l": 6.5,
+          "h": 1.2
+        },
+        "weight": 33.5,
+        "value": 93.0,
+        "is_fragile": false,
+        "eta": 6.0,
+        "orientation": 4
+      },
+      {
+        "id": "Package_6402",
+        "dimensions": {
+          "w": 1.9,
+          "l": 5.1,
+          "h": 2.3
+        },
+        "weight": 10.6,
+        "value": 81.1,
+        "is_fragile": true,
+        "eta": 5.0,
+        "orientation": 4
+      },
+      {
+        "id": "Package_7901",
+        "dimensions": {
+          "w": 6.3,
+          "l": 3.7,
+          "h": 2.9
+        },
+        "weight": 46.7,
+        "value": 133.9,
+        "is_fragile": false,
+        "eta": 1.0,
+        "orientation": 5
+      },
+      {
+        "id": "Package_6641",
+        "dimensions": {
+          "w": 6.8,
+          "l": 1.7,
+          "h": 1.9
+        },
+        "weight": 47.7,
+        "value": 97.2,
+        "is_fragile": false,
+        "eta": 4.0,
+        "orientation": 0
+      },
+      {
+        "id": "Package_2445",
+        "dimensions": {
+          "w": 3.5,
+          "l": 7.4,
+          "h": 2.5
+        },
+        "weight": 39.1,
+        "value": 18.6,
+        "is_fragile": false,
+        "eta": 4.0,
+        "orientation": 2
+      },
+      {
+        "id": "Package_9950",
+        "dimensions": {
+          "w": 2.8,
+          "l": 4.6,
+          "h": 2.6
+        },
+        "weight": 93.3,
+        "value": 108.7,
+        "is_fragile": true,
+        "eta": 7.0,
+        "orientation": 4
+      },
+      {
+        "id": "Package_8806",
+        "dimensions": {
+          "w": 6.0,
+          "l": 1.4,
+          "h": 3.2
+        },
+        "weight": 92.6,
+        "value": 72.2,
+        "is_fragile": false,
+        "eta": 3.0,
+        "orientation": 3
+      },
+      {
+        "id": "Package_7239",
+        "dimensions": {
+          "w": 4.4,
+          "l": 7.0,
+          "h": 1.9
+        },
+        "weight": 48.1,
+        "value": 80.4,
+        "is_fragile": false,
+        "eta": 1.0,
+        "orientation": 0
+      },
+      {
+        "id": "Package_2655",
+        "dimensions": {
+          "w": 7.3,
+          "l": 6.6,
+          "h": 1.5
+        },
+        "weight": 3.1,
+        "value": 32.4,
+        "is_fragile": false,
+        "eta": 6.0,
+        "orientation": 4
+      },
+      {
+        "id": "Package_8020",
+        "dimensions": {
+          "w": 2.4,
+          "l": 1.3,
+          "h": 2.3
+        },
+        "weight": 21.6,
+        "value": 100.1,
+        "is_fragile": false,
+        "eta": 6.0,
+        "orientation": 1
+      },
+      {
+        "id": "Package_9245",
+        "dimensions": {
+          "w": 7.5,
+          "l": 4.9,
+          "h": 1.8
+        },
+        "weight": 80.4,
+        "value": 55.1,
+        "is_fragile": false,
+        "eta": 4.0,
+        "orientation": 3
+      },
+      {
+        "id": "Package_8079",
+        "dimensions": {
+          "w": 1.8,
+          "l": 3.2,
+          "h": 3.0
+        },
+        "weight": 34.7,
+        "value": 91.7,
+        "is_fragile": false,
+        "eta": 6.0,
+        "orientation": 2
+      },
+      {
+        "id": "Package_5033",
+        "dimensions": {
+          "w": 3.7,
+          "l": 5.7,
+          "h": 1.4
+        },
+        "weight": 50.7,
+        "value": 31.3,
+        "is_fragile": false,
+        "eta": 6.0,
+        "orientation": 4
+      },
+      {
+        "id": "Package_9444",
+        "dimensions": {
+          "w": 2.3,
+          "l": 7.5,
+          "h": 2.3
+        },
+        "weight": 5.0,
+        "value": 33.2,
+        "is_fragile": false,
+        "eta": 7.0,
+        "orientation": 3
+      },
+      {
+        "id": "Package_9436",
+        "dimensions": {
+          "w": 3.7,
+          "l": 6.8,
+          "h": 2.8
+        },
+        "weight": 60.1,
+        "value": 114.8,
+        "is_fragile": false,
+        "eta": 4.0,
+        "orientation": 2
+      },
+      {
+        "id": "Package_1973",
+        "dimensions": {
+          "w": 1.7,
+          "l": 3.4,
+          "h": 2.0
+        },
+        "weight": 8.9,
+        "value": 162.1,
+        "is_fragile": false,
+        "eta": 5.0,
+        "orientation": 0
+      },
+      {
+        "id": "Package_6420",
+        "dimensions": {
+          "w": 5.8,
+          "l": 5.3,
+          "h": 3.2
+        },
+        "weight": 72.9,
+        "value": 95.4,
+        "is_fragile": false,
+        "eta": 1.0,
+        "orientation": 5
+      },
+      {
+        "id": "Package_123",
+        "dimensions": {
+          "w": 3.3,
+          "l": 7.8,
+          "h": 1.9
+        },
+        "weight": 91.9,
+        "value": 159.8,
+        "is_fragile": false,
+        "eta": 1.0,
+        "orientation": 2
+      },
+      {
+        "id": "Package_6997",
+        "dimensions": {
+          "w": 3.1,
+          "l": 7.1,
+          "h": 3.3
+        },
+        "weight": 29.4,
+        "value": 144.3,
+        "is_fragile": false,
+        "eta": 3.0,
+        "orientation": 4
+      },
+      {
+        "id": "Package_1150",
+        "dimensions": {
+          "w": 4.9,
+          "l": 6.1,
+          "h": 3.3
+        },
+        "weight": 44.0,
+        "value": 31.3,
+        "is_fragile": false,
+        "eta": 1.0,
+        "orientation": 2
+      },
+      {
+        "id": "Package_7347",
+        "dimensions": {
+          "w": 7.9,
+          "l": 1.9,
+          "h": 2.5
+        },
+        "weight": 70.1,
+        "value": 143.2,
+        "is_fragile": false,
+        "eta": 7.0,
+        "orientation": 0
+      },
+      {
+        "id": "Package_847",
+        "dimensions": {
+          "w": 5.6,
+          "l": 6.6,
+          "h": 4.1
+        },
+        "weight": 33.3,
+        "value": 66.1,
+        "is_fragile": false,
+        "eta": 2.0,
+        "orientation": 2
+      },
+      {
+        "id": "Package_2974",
+        "dimensions": {
+          "w": 4.0,
+          "l": 5.3,
+          "h": 2.1
+        },
+        "weight": 53.2,
+        "value": 47.7,
+        "is_fragile": false,
+        "eta": 1.0,
+        "orientation": 1
+      },
+      {
+        "id": "Package_516",
+        "dimensions": {
+          "w": 5.7,
+          "l": 7.1,
+          "h": 4.6
+        },
+        "weight": 26.3,
+        "value": 124.1,
+        "is_fragile": false,
+        "eta": 3.0,
+        "orientation": 1
+      },
+      {
+        "id": "Package_4880",
+        "dimensions": {
+          "w": 4.7,
+          "l": 7.6,
+          "h": 1.9
+        },
+        "weight": 84.7,
+        "value": 114.2,
+        "is_fragile": true,
+        "eta": 4.0,
+        "orientation": 4
+      },
+      {
+        "id": "Package_9369",
+        "dimensions": {
+          "w": 3.0,
+          "l": 5.3,
+          "h": 4.4
+        },
+        "weight": 4.0,
+        "value": 21.8,
+        "is_fragile": false,
+        "eta": 7.0,
+        "orientation": 2
+      },
+      {
+        "id": "Package_7663",
+        "dimensions": {
+          "w": 3.9,
+          "l": 7.4,
+          "h": 1.7
+        },
+        "weight": 29.5,
+        "value": 143.2,
+        "is_fragile": false,
+        "eta": 2.0,
+        "orientation": 4
+      },
+      {
+        "id": "Package_7606",
+        "dimensions": {
+          "w": 7.6,
+          "l": 1.3,
+          "h": 3.2
+        },
+        "weight": 80.0,
+        "value": 124.0,
+        "is_fragile": false,
+        "eta": 1.0,
+        "orientation": 3
+      },
+      {
+        "id": "Package_6329",
+        "dimensions": {
+          "w": 3.0,
+          "l": 1.1,
+          "h": 1.7
+        },
+        "weight": 37.9,
+        "value": 88.9,
+        "is_fragile": false,
+        "eta": 6.0,
+        "orientation": 4
+      },
+      {
+        "id": "Package_673",
+        "dimensions": {
+          "w": 6.4,
+          "l": 5.0,
+          "h": 3.8
+        },
+        "weight": 79.8,
+        "value": 86.6,
+        "is_fragile": true,
+        "eta": 4.0,
+        "orientation": 0
+      },
+      {
+        "id": "Package_8347",
+        "dimensions": {
+          "w": 7.6,
+          "l": 3.7,
+          "h": 3.6
+        },
+        "weight": 20.7,
+        "value": 68.5,
+        "is_fragile": false,
+        "eta": 5.0,
+        "orientation": 4
+      },
+      {
+        "id": "Package_2554",
+        "dimensions": {
+          "w": 5.5,
+          "l": 4.8,
+          "h": 3.3
+        },
+        "weight": 66.1,
+        "value": 69.0,
+        "is_fragile": true,
+        "eta": 7.0,
+        "orientation": 0
+      },
+      {
+        "id": "Package_9483",
+        "dimensions": {
+          "w": 1.7,
+          "l": 3.4,
+          "h": 2.4
+        },
+        "weight": 77.6,
+        "value": 26.7,
+        "is_fragile": false,
+        "eta": 1.0,
+        "orientation": 3
+      },
+      {
+        "id": "Package_5554",
+        "dimensions": {
+          "w": 5.1,
+          "l": 5.7,
+          "h": 3.8
+        },
+        "weight": 27.8,
+        "value": 148.2,
+        "is_fragile": false,
+        "eta": 6.0,
+        "orientation": 5
+      },
+      {
+        "id": "Package_1936",
+        "dimensions": {
+          "w": 4.8,
+          "l": 6.3,
+          "h": 3.9
+        },
+        "weight": 74.0,
+        "value": 22.2,
+        "is_fragile": false,
+        "eta": 6.0,
+        "orientation": 0
+      },
+      {
+        "id": "Package_4680",
+        "dimensions": {
+          "w": 3.9,
+          "l": 7.3,
+          "h": 1.7
+        },
+        "weight": 30.1,
+        "value": 193.3,
+        "is_fragile": false,
+        "eta": 3.0,
+        "orientation": 5
+      },
+      {
+        "id": "Package_2309",
+        "dimensions": {
+          "w": 7.7,
+          "l": 5.4,
+          "h": 4.1
+        },
+        "weight": 51.8,
+        "value": 195.2,
+        "is_fragile": false,
+        "eta": 7.0,
+        "orientation": 2
+      },
+      {
+        "id": "Package_4021",
+        "dimensions": {
+          "w": 3.9,
+          "l": 5.9,
+          "h": 2.2
+        },
+        "weight": 40.3,
+        "value": 38.4,
+        "is_fragile": false,
+        "eta": 2.0,
+        "orientation": 2
+      },
+      {
+        "id": "Package_1098",
+        "dimensions": {
+          "w": 6.8,
+          "l": 2.8,
+          "h": 2.4
+        },
+        "weight": 34.6,
+        "value": 68.3,
+        "is_fragile": false,
+        "eta": 1.0,
+        "orientation": 5
+      },
+      {
+        "id": "Package_6770",
+        "dimensions": {
+          "w": 1.8,
+          "l": 3.6,
+          "h": 1.7
+        },
+        "weight": 4.6,
+        "value": 27.9,
+        "is_fragile": false,
+        "eta": 1.0,
+        "orientation": 1
+      }
+    ]
+  }
