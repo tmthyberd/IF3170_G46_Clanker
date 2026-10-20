@@ -1,0 +1,14 @@
+services:
+  clanker_tubes1_ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: local_search_app
+    restart: on-failure
+    volumes:
+      - ./output:/app/output
+    environment:
+      - PYTHONPATH=/app
+      - DEBUG=false
+    ports:
+      - "8050:80"
