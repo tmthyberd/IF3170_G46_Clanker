@@ -1,0 +1,361 @@
+{
+  "algorithm": "Hill-Climbing (Sideways Move)",
+  "duration_seconds": 3.510977857004036,
+  "initial_state": {
+    "truck": {
+      "id": "Truck_1",
+      "w": 10.0,
+      "l": 20.0,
+      "h": 5.0,
+      "max_capacity": 500.0
+    },
+    "trucks": [
+      {
+        "id": "Truck_1",
+        "w": 10.0,
+        "l": 20.0,
+        "h": 5.0,
+        "max_capacity": 500.0
+      }
+    ],
+    "packages_in_truck": [],
+    "packages_outside_truck": [
+      "PKG-01-Rusdi",
+      "PKG-02-PorcelainVase",
+      "PKG-03-SteelBox",
+      "PKG-04-Electronics",
+      "PKG-05-WoodPlanks",
+      "PKG-06-Books",
+      "PKG-07-Glassware",
+      "PKG-08-HeavyMachinery",
+      "PKG-09-Clothing",
+      "PKG-10-WineBottles",
+      "PKG-11-Furniture",
+      "PKG-12-MedicalKits"
+    ],
+    "total_value": 0,
+    "total_weight": 0
+  },
+  "final_state": {
+    "truck": {
+      "id": "Truck_1",
+      "w": 10.0,
+      "l": 20.0,
+      "h": 5.0,
+      "max_capacity": 500.0
+    },
+    "trucks": [
+      {
+        "id": "Truck_1",
+        "w": 10.0,
+        "l": 20.0,
+        "h": 5.0,
+        "max_capacity": 500.0
+      }
+    ],
+    "packages_in_truck": [
+      {
+        "package_id": "PKG-01-Rusdi",
+        "truck_id": 0,
+        "x": 13.0,
+        "y": 0.0,
+        "z": 2.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          13.0,
+          0.0,
+          2.0
+        ],
+        "dimensions_effective": [
+          3.0,
+          4.0,
+          1.0
+        ]
+      },
+      {
+        "package_id": "PKG-02-PorcelainVase",
+        "truck_id": 0,
+        "x": 9.0,
+        "y": 0.0,
+        "z": 0.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          9.0,
+          0.0,
+          0.0
+        ],
+        "dimensions_effective": [
+          2.0,
+          2.0,
+          3.0
+        ]
+      },
+      {
+        "package_id": "PKG-03-SteelBox",
+        "truck_id": 0,
+        "x": 0.0,
+        "y": 0.0,
+        "z": 3.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          0.0,
+          0.0,
+          3.0
+        ],
+        "dimensions_effective": [
+          4.0,
+          5.0,
+          2.0
+        ]
+      },
+      {
+        "package_id": "PKG-04-Electronics",
+        "truck_id": 0,
+        "x": 13.0,
+        "y": 0.0,
+        "z": 3.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          13.0,
+          0.0,
+          3.0
+        ],
+        "dimensions_effective": [
+          3.0,
+          3.0,
+          2.0
+        ]
+      },
+      {
+        "package_id": "PKG-05-WoodPlanks",
+        "truck_id": 0,
+        "x": 17.0,
+        "y": 0.0,
+        "z": 0.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          17.0,
+          0.0,
+          0.0
+        ],
+        "dimensions_effective": [
+          2.0,
+          10.0,
+          1.0
+        ]
+      },
+      {
+        "package_id": "PKG-06-Books",
+        "truck_id": 0,
+        "x": 13.0,
+        "y": 0.0,
+        "z": 0.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          13.0,
+          0.0,
+          0.0
+        ],
+        "dimensions_effective": [
+          3.0,
+          4.0,
+          2.0
+        ]
+      },
+      {
+        "package_id": "PKG-07-Glassware",
+        "truck_id": 0,
+        "x": 13.0,
+        "y": 5.0,
+        "z": 0.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          13.0,
+          5.0,
+          0.0
+        ],
+        "dimensions_effective": [
+          2.0,
+          3.0,
+          2.0
+        ]
+      },
+      {
+        "package_id": "PKG-08-HeavyMachinery",
+        "truck_id": 0,
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "dimensions_effective": [
+          5.0,
+          6.0,
+          3.0
+        ]
+      },
+      {
+        "package_id": "PKG-09-Clothing",
+        "truck_id": 0,
+        "x": 0.0,
+        "y": 6.0,
+        "z": 0.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          0.0,
+          6.0,
+          0.0
+        ],
+        "dimensions_effective": [
+          4.0,
+          4.0,
+          2.0
+        ]
+      },
+      {
+        "package_id": "PKG-10-WineBottles",
+        "truck_id": 0,
+        "x": 11.0,
+        "y": 2.0,
+        "z": 0.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          11.0,
+          2.0,
+          0.0
+        ],
+        "dimensions_effective": [
+          2.0,
+          4.0,
+          2.0
+        ]
+      },
+      {
+        "package_id": "PKG-11-Furniture",
+        "truck_id": 0,
+        "x": 5.0,
+        "y": 0.0,
+        "z": 0.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          5.0,
+          0.0,
+          0.0
+        ],
+        "dimensions_effective": [
+          4.0,
+          8.0,
+          3.0
+        ]
+      },
+      {
+        "package_id": "PKG-12-MedicalKits",
+        "truck_id": 0,
+        "x": 11.0,
+        "y": 0.0,
+        "z": 0.0,
+        "orientation": 0,
+        "in_truck": true,
+        "position": [
+          11.0,
+          0.0,
+          0.0
+        ],
+        "dimensions_effective": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ],
+    "packages_outside_truck": [],
+    "total_value": 1895.0,
+    "total_weight": 336.0
+  },
+  "final_objective": 1895.0,
+  "objective_history": [
+    0.0,
+    350.0,
+    610.0,
+    830.0,
+    1030.0,
+    1210.0,
+    1360.0,
+    1480.0,
+    1590.0,
+    1680.0,
+    1760.0,
+    1835.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0,
+    1895.0
+  ],
+  "extra_metrics": {
+    "is_valid": true,
+    "violations": [],
+    "run_index": 2
+  }
+}

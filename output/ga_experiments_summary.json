@@ -1,0 +1,532 @@
+{
+  "metadata": {
+    "total_runs": 18,
+    "repetitions_per_config": 3,
+    "input_file": "data/sample_input.json",
+    "truck": "10.0x20.0x5.0 (Cap: 500.0)",
+    "total_packages": 12,
+    "generated_at": "2026-10-20 12:41:12"
+  },
+  "control_population": {
+    "fixed_population": 50,
+    "variations": {
+      "50": {
+        "mean_objective": 1895.0,
+        "std_objective": 0.0,
+        "mean_duration": 0.9804,
+        "runs": [
+          {
+            "run_id": 1,
+            "group": "control_population",
+            "population": 50,
+            "iterations": 50,
+            "repetition": 1,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 0.923,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_001_20261020_124113_246.json",
+            "plot_file": "plots/ga_ctrl_pop_50_iter_50_run_1_20261020_124113_246.png"
+          },
+          {
+            "run_id": 2,
+            "group": "control_population",
+            "population": 50,
+            "iterations": 50,
+            "repetition": 2,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 0.9547,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_002_20261020_124114_342.json",
+            "plot_file": "plots/ga_ctrl_pop_50_iter_50_run_2_20261020_124114_342.png"
+          },
+          {
+            "run_id": 3,
+            "group": "control_population",
+            "population": 50,
+            "iterations": 50,
+            "repetition": 3,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 1.0634,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_003_20261020_124115_570.json",
+            "plot_file": "plots/ga_ctrl_pop_50_iter_50_run_3_20261020_124115_571.png"
+          }
+        ]
+      },
+      "100": {
+        "mean_objective": 1895.0,
+        "std_objective": 0.0,
+        "mean_duration": 1.9845,
+        "runs": [
+          {
+            "run_id": 4,
+            "group": "control_population",
+            "population": 50,
+            "iterations": 100,
+            "repetition": 1,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 2.0262,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_004_20261020_124117_733.json",
+            "plot_file": "plots/ga_ctrl_pop_50_iter_100_run_1_20261020_124117_737.png"
+          },
+          {
+            "run_id": 5,
+            "group": "control_population",
+            "population": 50,
+            "iterations": 100,
+            "repetition": 2,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 1.9162,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_005_20261020_124119_820.json",
+            "plot_file": "plots/ga_ctrl_pop_50_iter_100_run_2_20261020_124119_821.png"
+          },
+          {
+            "run_id": 6,
+            "group": "control_population",
+            "population": 50,
+            "iterations": 100,
+            "repetition": 3,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 2.0112,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_006_20261020_124121_975.json",
+            "plot_file": "plots/ga_ctrl_pop_50_iter_100_run_3_20261020_124121_976.png"
+          }
+        ]
+      },
+      "200": {
+        "mean_objective": 1895.0,
+        "std_objective": 0.0,
+        "mean_duration": 3.9832,
+        "runs": [
+          {
+            "run_id": 7,
+            "group": "control_population",
+            "population": 50,
+            "iterations": 200,
+            "repetition": 1,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 4.1015,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_007_20261020_124126_211.json",
+            "plot_file": "plots/ga_ctrl_pop_50_iter_200_run_1_20261020_124126_212.png"
+          },
+          {
+            "run_id": 8,
+            "group": "control_population",
+            "population": 50,
+            "iterations": 200,
+            "repetition": 2,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 3.887,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_008_20261020_124130_244.json",
+            "plot_file": "plots/ga_ctrl_pop_50_iter_200_run_2_20261020_124130_245.png"
+          },
+          {
+            "run_id": 9,
+            "group": "control_population",
+            "population": 50,
+            "iterations": 200,
+            "repetition": 3,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 3.9612,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_009_20261020_124134_360.json",
+            "plot_file": "plots/ga_ctrl_pop_50_iter_200_run_3_20261020_124134_360.png"
+          }
+        ]
+      }
+    }
+  },
+  "control_generations": {
+    "fixed_generations": 100,
+    "variations": {
+      "20": {
+        "mean_objective": 1895.0,
+        "std_objective": 0.0,
+        "mean_duration": 0.7705,
+        "runs": [
+          {
+            "run_id": 10,
+            "group": "control_generations",
+            "population": 20,
+            "iterations": 100,
+            "repetition": 1,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 0.7459,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_010_20261020_124135_249.json",
+            "plot_file": "plots/ga_ctrl_iter_100_pop_20_run_1_20261020_124135_250.png"
+          },
+          {
+            "run_id": 11,
+            "group": "control_generations",
+            "population": 20,
+            "iterations": 100,
+            "repetition": 2,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 0.8096,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_011_20261020_124136_190.json",
+            "plot_file": "plots/ga_ctrl_iter_100_pop_20_run_2_20261020_124136_190.png"
+          },
+          {
+            "run_id": 12,
+            "group": "control_generations",
+            "population": 20,
+            "iterations": 100,
+            "repetition": 3,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 0.756,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_012_20261020_124137_081.json",
+            "plot_file": "plots/ga_ctrl_iter_100_pop_20_run_3_20261020_124137_082.png"
+          }
+        ]
+      },
+      "50": {
+        "mean_objective": 1895.0,
+        "std_objective": 0.0,
+        "mean_duration": 1.9081,
+        "runs": [
+          {
+            "run_id": 13,
+            "group": "control_generations",
+            "population": 50,
+            "iterations": 100,
+            "repetition": 1,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 1.9367,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_013_20261020_124139_163.json",
+            "plot_file": "plots/ga_ctrl_iter_100_pop_50_run_1_20261020_124139_164.png"
+          },
+          {
+            "run_id": 14,
+            "group": "control_generations",
+            "population": 50,
+            "iterations": 100,
+            "repetition": 2,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 1.8366,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_014_20261020_124141_136.json",
+            "plot_file": "plots/ga_ctrl_iter_100_pop_50_run_2_20261020_124141_136.png"
+          },
+          {
+            "run_id": 15,
+            "group": "control_generations",
+            "population": 50,
+            "iterations": 100,
+            "repetition": 3,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 1.951,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_015_20261020_124143_222.json",
+            "plot_file": "plots/ga_ctrl_iter_100_pop_50_run_3_20261020_124143_223.png"
+          }
+        ]
+      },
+      "100": {
+        "mean_objective": 1895.0,
+        "std_objective": 0.0,
+        "mean_duration": 4.5917,
+        "runs": [
+          {
+            "run_id": 16,
+            "group": "control_generations",
+            "population": 100,
+            "iterations": 100,
+            "repetition": 1,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 4.4429,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_016_20261020_124147_799.json",
+            "plot_file": "plots/ga_ctrl_iter_100_pop_100_run_1_20261020_124147_800.png"
+          },
+          {
+            "run_id": 17,
+            "group": "control_generations",
+            "population": 100,
+            "iterations": 100,
+            "repetition": 2,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 4.5245,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_017_20261020_124152_480.json",
+            "plot_file": "plots/ga_ctrl_iter_100_pop_100_run_2_20261020_124152_481.png"
+          },
+          {
+            "run_id": 18,
+            "group": "control_generations",
+            "population": 100,
+            "iterations": 100,
+            "repetition": 3,
+            "initial_objective": 1895.0,
+            "final_objective": 1895.0,
+            "duration_seconds": 4.8077,
+            "is_valid": true,
+            "log_file": "benchmark_ga_run_018_20261020_124157_475.json",
+            "plot_file": "plots/ga_ctrl_iter_100_pop_100_run_3_20261020_124157_476.png"
+          }
+        ]
+      }
+    }
+  },
+  "all_runs": [
+    {
+      "run_id": 1,
+      "group": "control_population",
+      "population": 50,
+      "iterations": 50,
+      "repetition": 1,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 0.923,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_001_20261020_124113_246.json",
+      "plot_file": "plots/ga_ctrl_pop_50_iter_50_run_1_20261020_124113_246.png"
+    },
+    {
+      "run_id": 2,
+      "group": "control_population",
+      "population": 50,
+      "iterations": 50,
+      "repetition": 2,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 0.9547,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_002_20261020_124114_342.json",
+      "plot_file": "plots/ga_ctrl_pop_50_iter_50_run_2_20261020_124114_342.png"
+    },
+    {
+      "run_id": 3,
+      "group": "control_population",
+      "population": 50,
+      "iterations": 50,
+      "repetition": 3,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 1.0634,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_003_20261020_124115_570.json",
+      "plot_file": "plots/ga_ctrl_pop_50_iter_50_run_3_20261020_124115_571.png"
+    },
+    {
+      "run_id": 4,
+      "group": "control_population",
+      "population": 50,
+      "iterations": 100,
+      "repetition": 1,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 2.0262,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_004_20261020_124117_733.json",
+      "plot_file": "plots/ga_ctrl_pop_50_iter_100_run_1_20261020_124117_737.png"
+    },
+    {
+      "run_id": 5,
+      "group": "control_population",
+      "population": 50,
+      "iterations": 100,
+      "repetition": 2,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 1.9162,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_005_20261020_124119_820.json",
+      "plot_file": "plots/ga_ctrl_pop_50_iter_100_run_2_20261020_124119_821.png"
+    },
+    {
+      "run_id": 6,
+      "group": "control_population",
+      "population": 50,
+      "iterations": 100,
+      "repetition": 3,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 2.0112,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_006_20261020_124121_975.json",
+      "plot_file": "plots/ga_ctrl_pop_50_iter_100_run_3_20261020_124121_976.png"
+    },
+    {
+      "run_id": 7,
+      "group": "control_population",
+      "population": 50,
+      "iterations": 200,
+      "repetition": 1,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 4.1015,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_007_20261020_124126_211.json",
+      "plot_file": "plots/ga_ctrl_pop_50_iter_200_run_1_20261020_124126_212.png"
+    },
+    {
+      "run_id": 8,
+      "group": "control_population",
+      "population": 50,
+      "iterations": 200,
+      "repetition": 2,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 3.887,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_008_20261020_124130_244.json",
+      "plot_file": "plots/ga_ctrl_pop_50_iter_200_run_2_20261020_124130_245.png"
+    },
+    {
+      "run_id": 9,
+      "group": "control_population",
+      "population": 50,
+      "iterations": 200,
+      "repetition": 3,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 3.9612,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_009_20261020_124134_360.json",
+      "plot_file": "plots/ga_ctrl_pop_50_iter_200_run_3_20261020_124134_360.png"
+    },
+    {
+      "run_id": 10,
+      "group": "control_generations",
+      "population": 20,
+      "iterations": 100,
+      "repetition": 1,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 0.7459,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_010_20261020_124135_249.json",
+      "plot_file": "plots/ga_ctrl_iter_100_pop_20_run_1_20261020_124135_250.png"
+    },
+    {
+      "run_id": 11,
+      "group": "control_generations",
+      "population": 20,
+      "iterations": 100,
+      "repetition": 2,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 0.8096,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_011_20261020_124136_190.json",
+      "plot_file": "plots/ga_ctrl_iter_100_pop_20_run_2_20261020_124136_190.png"
+    },
+    {
+      "run_id": 12,
+      "group": "control_generations",
+      "population": 20,
+      "iterations": 100,
+      "repetition": 3,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 0.756,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_012_20261020_124137_081.json",
+      "plot_file": "plots/ga_ctrl_iter_100_pop_20_run_3_20261020_124137_082.png"
+    },
+    {
+      "run_id": 13,
+      "group": "control_generations",
+      "population": 50,
+      "iterations": 100,
+      "repetition": 1,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 1.9367,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_013_20261020_124139_163.json",
+      "plot_file": "plots/ga_ctrl_iter_100_pop_50_run_1_20261020_124139_164.png"
+    },
+    {
+      "run_id": 14,
+      "group": "control_generations",
+      "population": 50,
+      "iterations": 100,
+      "repetition": 2,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 1.8366,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_014_20261020_124141_136.json",
+      "plot_file": "plots/ga_ctrl_iter_100_pop_50_run_2_20261020_124141_136.png"
+    },
+    {
+      "run_id": 15,
+      "group": "control_generations",
+      "population": 50,
+      "iterations": 100,
+      "repetition": 3,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 1.951,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_015_20261020_124143_222.json",
+      "plot_file": "plots/ga_ctrl_iter_100_pop_50_run_3_20261020_124143_223.png"
+    },
+    {
+      "run_id": 16,
+      "group": "control_generations",
+      "population": 100,
+      "iterations": 100,
+      "repetition": 1,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 4.4429,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_016_20261020_124147_799.json",
+      "plot_file": "plots/ga_ctrl_iter_100_pop_100_run_1_20261020_124147_800.png"
+    },
+    {
+      "run_id": 17,
+      "group": "control_generations",
+      "population": 100,
+      "iterations": 100,
+      "repetition": 2,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 4.5245,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_017_20261020_124152_480.json",
+      "plot_file": "plots/ga_ctrl_iter_100_pop_100_run_2_20261020_124152_481.png"
+    },
+    {
+      "run_id": 18,
+      "group": "control_generations",
+      "population": 100,
+      "iterations": 100,
+      "repetition": 3,
+      "initial_objective": 1895.0,
+      "final_objective": 1895.0,
+      "duration_seconds": 4.8077,
+      "is_valid": true,
+      "log_file": "benchmark_ga_run_018_20261020_124157_475.json",
+      "plot_file": "plots/ga_ctrl_iter_100_pop_100_run_3_20261020_124157_476.png"
+    }
+  ]
+}
