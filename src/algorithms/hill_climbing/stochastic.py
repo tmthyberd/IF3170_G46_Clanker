@@ -5,7 +5,6 @@ from typing import Callable
 from src.core.models import SolverState
 from src.core.objective import calculate_objective
 from src.core.moves import get_random_successor
-from src.algorithms.hill_climbing.base import HillClimbingResult
 
 DEFAULT_STOCHASTIC_MAX_ITERATION = 50
 

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Tuple
 from src.core.models import SolverState
 
 
@@ -15,7 +15,7 @@ def _xy_overlap(b1: Tuple[float, ...], b2: Tuple[float, ...], eps: float = 1e-5)
 
 
 
-def _placed_boxes_by_truck(state: State) -> Dict[int, List[Tuple[str, Tuple[float, float, float, float, float, float]]]]:
+def _placed_boxes_by_truck(state: SolverState) -> Dict[int, List[Tuple[str, Tuple[float, float, float, float, float, float]]]]:
     """
     Mengelompokkan paket di dalam truk berdasarkan indeks truknya
     """
@@ -31,7 +31,7 @@ def _placed_boxes_by_truck(state: State) -> Dict[int, List[Tuple[str, Tuple[floa
 
 
 
-def check_boundary_violations(state: State) -> List[str]:
+def check_boundary_violations(state: SolverState) -> List[str]:
     """
     Memeriksa apakah ada paket yang keluar dari batas dimensi kontainer truk
     """
@@ -62,7 +62,7 @@ def check_boundary_violations(state: State) -> List[str]:
 
 
 
-def check_overlap_violations(state: State) -> List[str]:
+def check_overlap_violations(state: SolverState) -> List[str]:
     """
     Memeriksa apakah ada dua paket di dalam truk yang sama yang saling bertabrakan di ruang 3D
     """
@@ -81,7 +81,7 @@ def check_overlap_violations(state: State) -> List[str]:
     return violations
 
 
-def check_floating_violations(state: State) -> List[str]:
+def check_floating_violations(state: SolverState) -> List[str]:
     """
     Memeriksa apakah ada paket yang melayang tanpa penopang di bawahnya di dalam truk yang sama
     """
@@ -103,7 +103,7 @@ def check_floating_violations(state: State) -> List[str]:
     return violations
 
 
-def check_fragile_violations(state: State) -> List[str]:
+def check_fragile_violations(state: SolverState) -> List[str]:
     """
     Memeriksa apakah ada paket fragile yang ditumpuk oleh paket lain di atasnya di dalam truk yang sama
     """
@@ -122,7 +122,7 @@ def check_fragile_violations(state: State) -> List[str]:
     return violations
 
 
-def check_capacity_violations(state: State) -> List[str]:
+def check_capacity_violations(state: SolverState) -> List[str]:
     """
     Memeriksa apakah total berat paket melebihi kapasitas maksimum masing-masing truk
     """
@@ -136,7 +136,7 @@ def check_capacity_violations(state: State) -> List[str]:
     return violations
 
 
-def validate_state(state: State) -> Tuple[bool, List[str]]:
+def validate_state(state: SolverState) -> Tuple[bool, List[str]]:
     """
     Menjalankan seluruh validasi aturan 3D dan mengembalikan status valid beserta daftar pelanggaran
     """
@@ -150,15 +150,18 @@ def validate_state(state: State) -> Tuple[bool, List[str]]:
     return len(violations) == 0, violations
 
 
-def evaluate_state_metrics(state: State) -> Dict[str, Any]:
+is_valid_state = validate_state
+
+
+def evaluate_state_metrics(state: SolverState) -> Dict[str, Any]:
     """Merangkum status validitas, daftar pelanggaran, dan metrik penataan state"""
-    is_valid, violations = is_valid_state(state)
+    is_valid, violations = validate_state(state)
     return {
         "is_valid": is_valid,
         "violations_count": len(violations),
         "violations": violations,
         "total_value": state.total_value_in_truck,
         "total_weight": state.total_weight_in_truck,
-        "packages_in_truck_count": len(state.packages_in_truck),
-        "packages_outside_count": len(state.packages_outside_truck),
+        "packages_in_truck_count": len(list(state.packages_in_truck)),
+        "packages_outside_count": len(list(state.packages_outside_truck)),
     }

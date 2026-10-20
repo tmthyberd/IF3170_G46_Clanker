@@ -223,8 +223,8 @@ def create_left_section():
             dbc.Input(
                 id="export-filename-input",
                 type="text",
-                placeholder="bin_packing_instance.json",
-                value="bin_packing_instance.json",
+                placeholder="input_sample.json",
+                value="input_sample.json",
                 size="sm",
                 className="mt-3 mb-1 fs-8"
             ),
@@ -412,6 +412,7 @@ def create_right_section():
                             {"label": "Objective Value vs Iterations", "value": "objective_curve"},
                             {"label": "Algorithm Metric (SA / GA / Random Restart)", "value": "algo_metric"},
                             {"label": "Truck Capacity Breakdown", "value": "truck_breakdown"},
+                            {"label": "Execution Duration (Overall)", "value": "duration_plot"},
                         ],
                         value="objective_curve",
                         clearable=False,

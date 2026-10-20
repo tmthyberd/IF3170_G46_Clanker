@@ -1,7 +1,7 @@
 """
 Genetic Algorithm package for 3D container loading problem.
 """
-from src.algorithms.genetic_algorithm.ga import GeneticAlgorithm, genetic_algorithm
+from src.algorithms.genetic_algorithm.genetic import genetic_algorithm
 from src.algorithms.genetic_algorithm.individual import Individual
 from src.algorithms.genetic_algorithm.operators import (
     tournament_selection,
@@ -12,7 +12,6 @@ from src.algorithms.genetic_algorithm.operators import (
 )
 
 __all__ = [
-    "GeneticAlgorithm",
     "genetic_algorithm",
     "Individual",
     "tournament_selection",

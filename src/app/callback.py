@@ -26,7 +26,9 @@ from src.algorithms.hill_climbing.steepest_ascent import steepest_ascent_hill_cl
 from src.algorithms.hill_climbing.sideways_move import sideways_hill_climbing, DEFAULT_MAX_SIDEWAYS_MOVE
 from src.algorithms.hill_climbing.stochastic import stochastic_hill_climbing, DEFAULT_STOCHASTIC_MAX_ITERATION
 from src.algorithms.hill_climbing.random_restart import random_restart_hill_climbing, DEFAULT_MAX_RESTART
-from src.algorithms.simulated_annealing.simulated_annealing import simulated_annealing, DEFAULT_COOLING_RATE, DEFAULT_INITIAL_TEMP
+from src.algorithms.simulated_annealing.sim_annealing import simulated_annealing, DEFAULT_COOLING_RATE, DEFAULT_INITIAL_TEMP
+from src.algorithms.genetic_algorithm.genetic import genetic_algorithm, DEFAULT_GA_POPULATION_SIZE, DEFAULT_GA_MAX_GENERATIONS
+
 
 
 DEFAULT_PACKAGES = [
@@ -123,6 +125,17 @@ def run_solver(
             objective_type=objective_type
         ):
             yield iteration_result
+    
+    # 6. Genetic Algorithm
+    elif algorithm_name == "genetic_algorithm":
+        for iteration_result in genetic_algorithm(
+            initial_state,
+            population_size=int(params.get("population_size", DEFAULT_GA_POPULATION_SIZE)),
+            max_generations=int(params.get("max_generations", DEFAULT_GA_MAX_GENERATIONS)),
+            strict=strict,
+            objective_type=objective_type,
+        ):
+            yield iteration_result 
         
 
 
@@ -425,6 +438,28 @@ def render_algo_params(selected_algo):
                     disabled=False
                 )
             ])
+        ]
+    elif selected_algo == "genetic_algorithm":
+        return [
+            dbc.Label("Population Size (N)", className="fw-bold fs-8 mb-1"),
+            dbc.Input(
+                id={"type": "algo-param", "key": "population_size"},
+                type="number",
+                value=50,
+                min=2,
+                max=500,
+                size="sm"
+            ),
+            dbc.Label("Max Iterations / Generations (G)", className="fw-bold fs-8 mt-2 mb-1"),
+            dbc.Input(
+                id={"type": "algo-param", "key": "max_generations"},
+                type="number",
+                value=100,
+                min=1,
+                max=5000,
+                size="sm"
+            ),
+            dbc.FormText("Genetic Algorithm optimizes 3D loading over successive generations.", className="fs-9 text-muted")
         ]
     else:  # Stochastic
         return [
@@ -969,9 +1004,14 @@ def update_visuals(slider_step, history, graph_view, instance_cache, relayout_da
         elif has_ga:
             pop_maxs = [h.get("pop_max", 0.0) for h in history]
             pop_avgs = [h.get("pop_avg", 0.0) for h in history]
-            fig_2d.add_trace(go.Scatter(x=iterations, y=pop_maxs, mode="lines", name="Max Fitness", line=dict(color="#10b981", width=2)))
+            overall_dur = history[-1].get("duration", 0.0) if history else 0.0
+            fig_2d.add_trace(go.Scatter(x=iterations, y=pop_maxs, mode="lines+markers", name="Max Fitness", line=dict(color="#10b981", width=2)))
             fig_2d.add_trace(go.Scatter(x=iterations, y=pop_avgs, mode="lines", name="Avg Fitness", line=dict(color="#3b82f6", dash="dot")))
-            fig_2d.update_layout(title=dict(text="GA: Population Fitness vs Generation", font=dict(size=12)), yaxis_title="Fitness")
+            fig_2d.update_layout(
+                title=dict(text=f"GA: Fitness vs Generation (Overall Duration: {overall_dur:.2f}s)", font=dict(size=12)),
+                xaxis=dict(title="Generation (Iteration)", showgrid=True),
+                yaxis_title="Fitness"
+            )
         elif has_rr:
             iter_counts = (rr_step.get("restart_iter_count") or rr_step.get("random_iter_count", [])) if rr_step else []
             x_labels = [f"Restart {i+1}" for i in range(len(iter_counts))]
@@ -1001,14 +1041,32 @@ def update_visuals(slider_step, history, graph_view, instance_cache, relayout_da
         fig_2d.add_trace(go.Bar(x=truck_names, y=max_caps, name="Max Capacity (kg)", marker_color="#94a3b8", opacity=0.4))
         fig_2d.update_layout(barmode="group", title=dict(text="Fleet Capacity Breakdown", font=dict(size=12)), yaxis_title="Weight (kg)")
 
+    elif graph_view == "duration_plot":
+        overall_duration = history[-1].get("duration", 0.0) if history else 0.0
+        algo_title = instance_cache.get("algo_name", "Algorithm")
+        fig_2d.add_trace(go.Bar(
+            x=[algo_title],
+            y=[overall_duration],
+            text=[f"{overall_duration:.3f}s"],
+            textposition="auto",
+            marker_color="#2563eb",
+            name="Overall Duration (s)"
+        ))
+        fig_2d.update_layout(
+            title=dict(text=f"Total Algorithm Execution Duration: {overall_duration:.3f} seconds", font=dict(size=12)),
+            xaxis=dict(title="Algorithm", showgrid=True),
+            yaxis=dict(title="Duration (seconds)", showgrid=True)
+        )
+
     else:
         # Default objective curve
         fig_2d.add_trace(go.Scatter(x=iterations, y=scores, mode="lines+markers", name="Objective Score", line=dict(color="#2563eb", width=2.5)))
         # Vertical marker at current step
         curr_it = iterations[step_idx]
         fig_2d.add_vline(x=curr_it, line_width=2, line_dash="dash", line_color="#ef4444")
+        overall_duration = history[-1].get("duration", 0.0) if history else 0.0
         fig_2d.update_layout(
-            title=dict(text=f"Objective vs Iteration (Step {step_idx}: {current_score:.1f})", font=dict(size=12)),
+            title=dict(text=f"Objective vs Iteration (Step {step_idx}: {current_score:.1f} | Overall Duration: {overall_duration:.2f}s)", font=dict(size=12)),
             xaxis=dict(title="Iteration", showgrid=True),
             yaxis=dict(title="Objective Score", showgrid=True)
         )
@@ -1114,9 +1172,9 @@ def export_json(n_clicks, filename_val, t1_names, t1_bools, t1_oris, t1_w, t1_l,
             "max_capacity": float(t2_cap[i] or 500.0)
         })
         
-    filename = (filename_val or "bin_packing_instance.json").strip()
+    filename = (filename_val or "input_sample.json").strip()
     if not filename:
-        filename = "bin_packing_instance.json"
+        filename = "input_sample.json"
     if not filename.endswith(".json"):
         filename += ".json"
 

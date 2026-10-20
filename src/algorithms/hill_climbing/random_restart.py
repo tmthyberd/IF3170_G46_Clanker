@@ -7,7 +7,6 @@ from src.core.models import Package, SolverState, Truck
 from src.core.objective import calculate_objective
 from src.core.moves import generate_initial_state, get_all_successors
 
-from src.algorithms.hill_climbing.base import HillClimbingResult
 from src.algorithms.hill_climbing.steepest_ascent import steepest_ascent_hill_climbing
 
 

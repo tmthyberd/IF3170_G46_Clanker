@@ -1,7 +1,7 @@
 from __future__ import annotations
 import random
 from typing import List, Optional, Tuple
-from src.core.models import Placement, State, Truck
+from src.core.models import Placement, SolverState, Truck
 from src.core.moves import (
     swap_packages,
     move_package_coordinate,
@@ -45,6 +45,8 @@ def roulette_wheel_selection(
 def uniform_crossover(
     parent1: Individual,
     parent2: Individual,
+    objective_type: str = "default",
+    strict: bool = False,
     rng: Optional[random.Random] = None,
 ) -> Tuple[Individual, Individual]:
     """Crossover seragam: tiap gen penempatan paket diwariskan dari salah satu induk secara independen"""
@@ -61,13 +63,17 @@ def uniform_crossover(
             c2_state.placements[pkg_id] = parent1.state.placements[pkg_id].copy()
 
     child1 = Individual(state=c1_state)
+    child1.evaluate(objective_type=objective_type, strict=strict)
     child2 = Individual(state=c2_state)
+    child2.evaluate(objective_type=objective_type, strict=strict)
     return child1, child2
 
 
 def two_point_crossover(
     parent1: Individual,
     parent2: Individual,
+    objective_type: str = "default",
+    strict: bool = False,
     rng: Optional[random.Random] = None,
 ) -> Tuple[Individual, Individual]:
     """Crossover dua titik pada susunan kromosom penempatan paket"""
@@ -92,13 +98,17 @@ def two_point_crossover(
             c2_state.placements[pkg_id] = parent2.state.placements[pkg_id].copy()
 
     child1 = Individual(state=c1_state)
+    child1.evaluate(objective_type=objective_type, strict=strict)
     child2 = Individual(state=c2_state)
+    child2.evaluate(objective_type=objective_type, strict=strict)
     return child1, child2
 
 
 def mutate_individual(
     individual: Individual,
-    truck: Truck,
+    truck: Optional[Truck] = None,
+    objective_type: str = "default",
+    strict: bool = False,
     rng: Optional[random.Random] = None,
 ) -> Individual:
     """Mutasi stokastik: swap penempatan, translasi posisi/status muat, atau rotasi orientasi."""
@@ -118,19 +128,17 @@ def mutate_individual(
     elif move_type == "relocate":
         pid = r.choice(pkg_ids)
         current_p = state.placements[pid]
+        target_truck_idx = r.randint(0, len(state.trucks) - 1) if state.trucks else 0
+        target_truck = state.trucks[target_truck_idx] if state.trucks else (truck if truck is not None else Truck())
+        dx, dy, dz = state.get_package_dims(pid)
+        new_x = float(r.randint(0, max(0, int(target_truck.l - dx))))
+        new_y = float(r.randint(0, max(0, int(target_truck.w - dy))))
+        new_z = 0.0 if r.random() < 0.7 else float(r.randint(0, max(0, int(target_truck.h - dz))))
         if r.random() < 0.4:
             new_in_truck = not current_p.in_truck
-            dx, dy, dz = state.get_package_dims(pid)
-            new_x = r.randint(0, max(0, truck.w - dx))
-            new_y = r.randint(0, max(0, truck.l - dy))
-            new_z = 0 if r.random() < 0.7 else r.randint(0, max(0, truck.h - dz))
-            state = toggle_in_truck(state, pid, in_truck=new_in_truck, coord=(new_x, new_y, new_z))
+            state = toggle_in_truck(state, pid, in_truck=new_in_truck, coord=(new_x, new_y, new_z), truck_id=target_truck_idx)
         else:
-            dx, dy, dz = state.get_package_dims(pid)
-            new_x = r.randint(0, max(0, truck.w - dx))
-            new_y = r.randint(0, max(0, truck.l - dy))
-            new_z = 0 if r.random() < 0.7 else r.randint(0, max(0, truck.h - dz))
-            state = move_package_coordinate(state, pid, (new_x, new_y, new_z))
+            state = move_package_coordinate(state, pid, (new_x, new_y, new_z), truck_id=target_truck_idx)
 
     elif move_type == "rotate":
         pid = r.choice(pkg_ids)
@@ -138,5 +146,5 @@ def mutate_individual(
         state = rotate_package(state, pid, new_orientation=new_ori)
 
     mutated = Individual(state=state)
-    mutated.evaluate()
+    mutated.evaluate(objective_type=objective_type, strict=strict)
     return mutated

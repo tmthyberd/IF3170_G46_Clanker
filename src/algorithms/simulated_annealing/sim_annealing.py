@@ -33,6 +33,7 @@ def simulated_annealing(
         "iteration": 0,
         "objective_value": current_val,
         "state": {k: v.to_dict() for k, v in current_state.placements.items()},
+        "duration": time.perf_counter() - start_time,
         "temperature": float(initial_temp),
         "delta_e": 0.0,
         "acceptance_chance": 1.0,
@@ -74,6 +75,7 @@ def simulated_annealing(
         yield {
             "iteration": iteration,
             "objective_value": current_val,
+            "duration": time.perf_counter() - start_time,
             "state": {k: v.to_dict() for k, v in current_state.placements.items()},
             "temperature": temp,
             "delta_e": delta_e,
