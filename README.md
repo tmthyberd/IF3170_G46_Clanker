@@ -30,32 +30,30 @@ Permasalahan ini memodelkan penataan paket-paket kubus/balok ke dalam peti kemas
 └── .gitignore
 ```
 
-## Persyaratan Lingkungan
-- Python 3.10+ (atau Docker & Docker Compose)
-- Instalasi dependensi Python:
-  ```bash
-  pip install -r requirements.txt
-  ```
-
 ## Cara Menjalankan Program
 
-### 1. Menjalankan Aplikasi Visualisasi 3D & Eksperimen secara Lokal
-Jalankan modul aplikasi Dash/Plotly dari direktori root proyek:
+### 1. Menjalankan WebApp
+
+Install **docker** dan tinggal dijalankan dengan,
+```
+docker compose up --build
+```
+
+Atau bisa langsung menggunakan lingkungan Python tanpa container dengan
+```
+pip3 install -r requirements.txt
+python3 src/app/app.py
+```
+
+Aplikasi dapat diakses melalui browser di `http://localhost:8080`
+
+
+### 2. Menjalankan Unit Test Core
+Untuk memverifikasi bahwa aplikasi dapat dijalankan untuk fungsionalitas 3D dan model dasar:
 ```bash
 python -m src.app.app
 ```
- *(atau `python src/app/app.py` dengan `PYTHONPATH=.`)*
 
-Kemudian buka browser pada alamat:
-```text
-http://localhost:8080
-```
-
-### 2. Menjalankan dengan Docker Compose
-```bash
-docker compose up --build
-```
-Aplikasi dapat diakses melalui browser di `http://localhost:8080`.
 
 ## Pembagian Tugas Kelompok (3 Anggota)
 
