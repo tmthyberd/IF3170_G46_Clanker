@@ -21,38 +21,46 @@ Permasalahan ini memodelkan penataan paket-paket kubus/balok ke dalam peti kemas
 │   │   ├── hill_climbing/
 │   │   ├── simulated_annealing/
 │   │   └── genetic_algorithm/
-│   ├── core/              # Model data 3D, validator kendala, objective, moves
-│   └── visualization/     # Visualisasi 3D dan plotting grafik
-├── tests/                 # Unit test verifikasi sistem
+│   ├── app/               # Aplikasi web interaktif 3D (Dash & Plotly)
+│   └── core/              # Model data 3D, validator kendala, objective, moves
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
 ├── README.md
 └── .gitignore
 ```
 
 ## Persyaratan Lingkungan
-- Python 3.10+
-- Library pendukung (opsional / untuk visualisasi jika menggunakan visualizer grafis):
+- Python 3.10+ (atau Docker & Docker Compose)
+- Instalasi dependensi Python:
   ```bash
-  pip install -r requirements.txt  # jika tersedia
+  pip install -r requirements.txt
   ```
 
 ## Cara Menjalankan Program
 
-### 1. Menjalankan Unit Test Core
-Untuk memverifikasi keabsahan mesin kendala 3D dan model dasar:
+### 1. Menjalankan Aplikasi Visualisasi 3D & Eksperimen secara Lokal
+Jalankan modul aplikasi Dash/Plotly dari direktori root proyek:
 ```bash
-python -m unittest discover tests
+python -m src.app.app
+```
+ *(atau `python src/app/app.py` dengan `PYTHONPATH=.`)*
+
+Kemudian buka browser pada alamat:
+```text
+http://localhost:8080
 ```
 
-### 2. Menjalankan Algoritma (CLI)
-Contoh pemanggilan runner (disediakan per modul algoritma):
+### 2. Menjalankan dengan Docker Compose
 ```bash
-python -m src.core.models
+docker compose up --build
 ```
+Aplikasi dapat diakses melalui browser di `http://localhost:8080`.
 
 ## Pembagian Tugas Kelompok (3 Anggota)
 
 | Anggota | NIM | Peran & Tanggung Jawab |
 | :--- | :--- | :--- |
-| **Anggota 1** | - | Core Architecture, 3D Constraint & Physics Engine, Move Operators, Hill-Climbing Algorithms (Steepest Ascent, Stochastic, Sideways Move, Random Restart). |
-| **Anggota 2** | - | 3D Interactive Visualizer, Plotting Engine, Simulated Annealing Algorithm. |
-| **Anggota 3** | - | Genetic Algorithm (Chromosome, Crossover, Mutation, Selection), Benchmark Runner & Output Logging, Analisis Komparatif. |
+| **Daniel Anindito Nugroho** | 13524002 | 3D Interactive Visualizer, Plotting Engine, Simulated Annealing Algorithm. |
+| **Muhammad Fatih Irkham Mauludi** | 13524004 | Genetic Algorithm (Chromosome, Crossover, Mutation, Selection), Benchmark Runner & Output Logging, Analisis Komparatif. |
+| **Timothy Bernard Soeharto** | 13524092 | Core Architecture, 3D Constraint & Physics Engine, Move Operators, Hill-Climbing Algorithms (Steepest Ascent, Stochastic, Sideways Move, Random Restart). |
