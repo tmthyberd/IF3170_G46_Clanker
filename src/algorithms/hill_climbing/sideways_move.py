@@ -1,65 +1,73 @@
 from __future__ import annotations
 import random
 import time
-from typing import Callable
-from src.core.models import State
+from typing import Callable, Set, Tuple, Generator, Any, Dict
+from src.core.models import SolverState
 from src.core.objective import calculate_objective
-from src.core.moves import generate_neighbors
+from src.core.moves import get_all_successors
 from src.algorithms.hill_climbing.base import HillClimbingResult
 
 
+DEFAULT_MAX_SIDEWAYS_MOVE = 500
+
+
 def sideways_hill_climbing(
-    initial_state: State,
-    max_sideways_moves: int = 50,
-    max_iterations: int = 500,
-    sample_neighbors: int = 40,
-    objective_fn: Callable[[State], float] = calculate_objective,
-) -> HillClimbingResult:
-    """Hill-Climbing dengan Sideways Move (jika max_sideways_moves=0 menjadi Steepest Ascent)"""
+    initial_state: SolverState,
+    max_sideways_moves: int = DEFAULT_MAX_SIDEWAYS_MOVE,
+    strict: bool = False,
+    objective_type: str = "default"
+) -> Generator[Dict[str, Any], None, None]:
+
     start_time = time.perf_counter()
     current_state = initial_state.clone()
-    current_val = objective_fn(current_state)
+    current_val = calculate_objective(current_state, objective_type=objective_type, strict=strict)
 
-    history = [current_val]
+    yield {
+        "iteration": 0,
+        "objective_value": current_val,
+        "state": {k: v.to_dict() for k, v in initial_state.placements.items()},
+        "duration": 0.0,
+        "sideways_count": 0,
+        "message": f"Initial state (Score: {current_val:.1f})",
+    }
+
+    tracker: Set[Tuple] = set()
+    tracker.add(current_state.signature)
+
     iteration = 0
-    consecutive_sideways = 0
     total_sideways = 0
-
-    while iteration < max_iterations:
+    while True:
         iteration += 1
-        neighbors = generate_neighbors(current_state, sample_size=sample_neighbors, valid_only=True)
-        if not neighbors:
+        
+        best_successor_val = float('-inf')
+        neighbor = None
+        for successor in get_all_successors(current_state, valid_only=True):
+            if successor.signature in tracker:
+                continue
+
+            score = calculate_objective(successor, objective_type=objective_type, strict=strict)
+            if best_successor_val < score:
+                best_successor_val = score
+                neighbor = successor
+
+        if neighbor is None or best_successor_val < current_val:
             break
 
-        scored = [(objective_fn(n), n) for n in neighbors]
-        best_val = max(val for val, _ in scored)
-        best_neighbors = [n for val, n in scored if val == best_val]
-
-        if best_val > current_val:
-            current_state = random.choice(best_neighbors)
-            current_val = best_val
-            consecutive_sideways = 0
-            history.append(current_val)
-        elif best_val == current_val and consecutive_sideways < max_sideways_moves:
-            consecutive_sideways += 1
+        if best_successor_val == current_val:
             total_sideways += 1
-            current_state = random.choice(best_neighbors)
-            history.append(current_val)
-        else:
-            break
+            if total_sideways > max_sideways_moves:
+                break
+        
+        current_val = best_successor_val
+        current_state = neighbor
+        tracker.add(current_state.signature)
 
-    return HillClimbingResult(
-        algorithm_name="Hill-Climbing with Sideways Move",
-        initial_state=initial_state,
-        final_state=current_state,
-        initial_objective=history[0],
-        final_objective=current_val,
-        duration_seconds=time.perf_counter() - start_time,
-        total_iterations=iteration,
-        objective_history=history,
-        extra_metrics={
-            "iterations_to_stop": iteration,
-            "max_sideways_moves_limit": max_sideways_moves,
-            "total_sideways_moves_taken": total_sideways,
-        },
-    )
+        yield {
+            "iteration": iteration,
+            "objective_value": current_val,
+            "state": {k: v.to_dict() for k, v in current_state.placements.items()},
+            "duration": time.perf_counter() - start_time,
+            "sideways_count": total_sideways,
+            "message": f"Step {iteration}: Sideways move to best neighbor ({current_val:.1f})",
+        }
+

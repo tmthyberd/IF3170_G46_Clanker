@@ -1,41 +1,92 @@
 from __future__ import annotations
-from src.core.models import State
-from src.core.validator import is_valid_state
+from typing import Any, Dict, Tuple
+from src.core.models import SolverState
+from src.core.validator import validate_state
 
-PENALTY_PER_VIOLATION = 1000.0
-
-
-def calculate_raw_value(state: State) -> float:
-    """Mengembalikan total nilai paket yang berada di dalam truk"""
-    return state.total_value_in_truck
+PENALTY_PER_VIOLATION = 100.0
 
 
-def calculate_objective(state: State, enforce_hard_constraints: bool = True) -> float:
-    """Fungsi objektif utama: memaksimalkan total nilai paket dengan penalti negatif jika melanggar aturan"""
-    is_valid, violations = is_valid_state(state)
-    if not is_valid:
-        return -PENALTY_PER_VIOLATION * len(violations) if enforce_hard_constraints else 0.0
-    return state.total_value_in_truck
+# Fungsi objektif dengan lima variasi (total value, eta, density, total value + eta, total value + density)
+# Asumsi total volume yan dapat ditampung truck lebih dari nol     
+def calculate_objective(state: SolverState, objective_type: str = "default", strict: bool = True) -> float:
+    is_valid, violations = validate_state(state)
+    if not is_valid and strict:
+        return 0.0
+
+    if objective_type == "eta":
+        eta_score = sum(
+            state.packages[p.package_id].value * (1.0 + 1.0 / max(0.5, state.packages[p.package_id].eta))
+            for p in state.packages_in_truck
+        )
+        value = eta_score
+
+    elif objective_type == "volume":
+        used_vol = 0.0
+        for p in state.packages_in_truck:
+            dx, dy, dz = state.get_package_dims(p.package_id)
+            used_vol += (dx * dy * dz)
+
+        total_trucks_vol = sum(t.volume for t in state.trucks)
+        vol_ratio = used_vol / total_trucks_vol
+
+        value = vol_ratio * 100
+
+    elif objective_type == "bonus_volume":
+        used_vol = 0.0
+        for p in state.packages_in_truck:
+            dx, dy, dz = state.get_package_dims(p.package_id)
+            used_vol += (dx * dy * dz)
+
+        total_trucks_vol = sum(t.volume for t in state.trucks)
+        vol_ratio = used_vol / total_trucks_vol
+
+        value = state.total_value_in_truck * (1.0 + 0.5 * vol_ratio)
+
+    elif objective_type == "bonus_eta":
+        eta_bonus = sum(
+            state.packages[p.package_id].value * 0.15 / max(1.0, state.packages[p.package_id].eta)
+            for p in state.packages_in_truck
+        )
+        value = state.total_value_in_truck + eta_bonus
+
+    elif objective_type == "bonus_volume_eta":
+        used_vol = 0.0
+        for p in state.packages_in_truck:
+            dx, dy, dz = state.get_package_dims(p.package_id)
+            used_vol += (dx * dy * dz)
+
+        total_trucks_vol = sum(t.volume for t in state.trucks)
+        vol_ratio = used_vol / total_trucks_vol
+
+        eta_bonus = sum(
+            state.packages[p.package_id].value * 0.15 / max(1.0, state.packages[p.package_id].eta)
+            for p in state.packages_in_truck
+        )
+
+        value = state.total_value_in_truck * (1.0 + 0.5 * vol_ratio) + eta_bonus
+
+    elif objective_type == "default":
+        value = state.total_value_in_truck
+
+    else:
+        raise NotImplementedError(f"Invalid objective function type: \"{objective_type}\"")        
 
 
-def calculate_alternative_objective(state: State) -> float:
-    """Fungsi objektif alternatif: kombinasi nilai, utilisasi volume, urgensi ETA, dan stabilitas titik berat."""
-    is_valid, violations = is_valid_state(state)
-    if not is_valid:
-        return -PENALTY_PER_VIOLATION * len(violations)
+    return value - PENALTY_PER_VIOLATION * len(violations)
 
-    truck_vol = max(1, state.truck.w * state.truck.l * state.truck.h)
-    max_cap = max(1.0, state.truck.max_capacity)
 
-    used_vol = 0
-    eta_bonus = 0.0
-    stability = 0.0
+# Overview evaluasi sebua state
+def evaluate_state(state: SolverState, objective_type: str = "default", strict: bool = False) -> Tuple[float, Dict[str, Any]]:
+    is_valid, violations = validate_state(state)
+    score = calculate_objective(state, objective_type=objective_type, strict=strict)
 
-    for p in state.packages_in_truck:
-        pkg = state.packages[p.package_id]
-        dx, dy, dz = state.get_package_dims(p.package_id)
-        used_vol += dx * dy * dz
-        eta_bonus += pkg.value * 0.15 / max(1, pkg.eta)
-        stability += (state.truck.h - p.position[2]) * (pkg.weight / max_cap) * 10.0
-
-    return state.total_value_in_truck + (used_vol / truck_vol) * 50.0 + eta_bonus + stability
+    metrics = {
+        "score": score,
+        "raw_value": state.total_value_in_truck,
+        "is_valid": is_valid,
+        "violations": violations,
+        "packed_count": len(list(state.packages_in_truck)),
+        "unpacked_count": len(list(state.packages_outside_truck)),
+        "truck_weights": {i: state.total_weight_in_truck_id(i) for i in range(len(state.trucks))}
+    }
+    return score, metrics

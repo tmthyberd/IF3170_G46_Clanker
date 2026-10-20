@@ -1,12 +1,14 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Dict, List
-from src.core.models import State
+from src.core.models import SolverState
 
 
 @dataclass
 class HillClimbingResult:
-    """Menyimpan hasil akhir dan metrik eksperimen algoritma Hill-Climbing"""
+    """
+    Menyimpan hasil akhir dan metrik eksperimen algoritma Hill-Climbing
+    """
     algorithm_name: str
     initial_state: State
     final_state: State
