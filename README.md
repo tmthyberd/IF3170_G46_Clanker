@@ -48,10 +48,17 @@ python3 src/app/app.py
 Aplikasi dapat diakses melalui browser di `http://localhost:8080`
 
 
-### 2. Menjalankan Unit Test Core
+### 2. Menjalankan Script untuk Testing
 Untuk memverifikasi bahwa aplikasi dapat dijalankan untuk fungsionalitas 3D dan model dasar:
 ```bash
 python -m src.app.app
+```
+
+Untuk melakukan testing melalui output benchmark CLI:
+```bash
+python -m src.algorithms.hill_climbing.runner --runs 3 # Untuk hill climbing algorithm
+python -m src.algorithms.simulated_annealing.runner --runs 3 # Untuk simulated annealing
+python -m src.experiments.ga_matrix_runner # Untuk genetic algorithm
 ```
 
 
