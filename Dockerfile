@@ -8,6 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/core/*.py src/core/
 COPY src/algorithms/hill_climbing/*.py src/algorithms/hill_climbing/
 COPY src/algorithms/simulated_annealing/*.py src/algorithms/simulated_annealing/
+COPY src/algorithms/genetic_algorithm/*.py src/algorithms/genetic_algorithm/
 COPY src/app/*.py src/app/
 COPY src/app/assets/* src/app/assets/
 
